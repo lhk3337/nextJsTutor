@@ -61,3 +61,27 @@ HTML -> <a class="link active">Home</a>
   <a className={[styles.link, router.pathname === "/about" ? styles.active : ""].join(" ")}>About</a>
 // 배열 방식
 ```
+
+### styles JSX
+
+- 컴포넌트에 style jsx를 선언하면 그 컴포넌트에서만 적용되고 하위 컴포넌트나 상위 컴포넌트에 영향을 주지 않는다.
+
+- 크롬에서 Element로 class를 확인 해보면 중복되지 않게 랜덤으로 클래스를 만든다.
+  ```css
+  .active.jsx-a7f96dab9380f5e4 {
+    color: yellow;
+  }
+  ```
+
+styles JSX 선언하기
+
+```jsx
+<style jsx>{`
+  nav {
+    background-color: tomato;
+  }
+  a {
+    text-decoration: none;
+  }
+`}</style>
+```

@@ -85,3 +85,39 @@ styles JSX 선언하기
   }
 `}</style>
 ```
+
+### Custom App
+
+- Custom App이 가장 먼저 렌더링 됨
+- global style을 적용할 수 있음
+- Custom App이 css를 임포트 할 수 있음
+
+#### nextjs에서 랜더링 순서
+
+1. \_app.js를 자동적으로 먼저 랜더링
+2. 그 후 index.js
+3. 그 다음 about.js 랜더링
+
+<br />
+
+\_app.js
+
+```jsx
+import NavBar from "../components/NavBar";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <>
+      <NavBar />
+      <Component {...pageProps} /> // about과 index component가 렌더링됨
+      <style jsx global>
+        {`
+          a {
+            color: green; // style을 전역적으로 설정하는 방법
+          }
+        `}
+      </style>
+    </>
+  );
+}
+```

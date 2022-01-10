@@ -121,3 +121,17 @@ export default function App({ Component, pageProps }) {
   );
 }
 ```
+
+## nextjs에서 head 태그 설정하기
+
+```jsx
+import Head from "next/head";
+
+export default function Seo({ title }) {
+  return (
+    <Head>
+      <title>{title} | Next Movies</title>
+    </Head>
+  );
+}
+```

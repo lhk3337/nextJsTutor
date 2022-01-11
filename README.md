@@ -233,7 +233,7 @@ useEffect(() => {
 ## Server Side Rendering
 
 - html의 값이 나타남, 페이지를 로드 하기 전까지 빈 화면으로 보이고, 로드가 끝나면 한번에 모든 페이지가 나타남
-- 서버 사이드 렌더링 미적용, api부분의 html이 없음 <br /><br />
+- 서버 사이드 렌더링 미적용, api부분이 html에 없음 <br /><br />
   <img width="1000" alt="client side" src="https://user-images.githubusercontent.com/44824320/148928463-94eb0181-fefa-4985-905b-46177d122054.png">
   <br /> <br />
 - 서버 사이드 적용, api부분이 html에 포함 되어 있음

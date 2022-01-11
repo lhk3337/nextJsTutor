@@ -135,3 +135,95 @@ export default function Seo({ title }) {
   );
 }
 ```
+
+## nextjs redirect
+
+source 주소에서 destination주소로 Redirect 됨
+
+### redirect 선언하기
+
+```js
+// next.config.js
+module.exports = {
+  reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: "/contact", // 원래 주소
+        destination: "/about", // 이동할 주소
+        permanent: false, // redirection이 영구적인지 아닌지 설정
+      },
+      {
+        source: "/form",
+        destination: "/submit",
+        permanent: false,
+      },
+    ];
+  },
+};
+```
+
+<br />
+
+### ID값이 포함된 주소를 redirect 하기
+
+```js
+...
+return [
+  {
+    source: "/old-blog/:path",
+    destination: "/new-blog/:path",
+    ...
+  }
+]
+...
+// /old-blog/1212 -> /new-blog/1212 (redirect)
+
+
+...
+return [
+  {
+    source: "/old-blog/:path*",
+    destination: "/new-blog/:path*",
+    ...
+  }
+]
+...
+// old-blog/1212/comments/1212 -> new-blog/1212/comments/1212
+// path가 긴 주소를 redirect
+```
+
+## nextjs rewrite
+
+redirect와 비슷하지만 유저가 URL변화를 볼 수 없음
+
+```js
+const API_KEY=precess.env.KEY
+module.exports = {
+  reactStrictMode: true,
+  async redirects() {
+    ...
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/movies",
+        destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+      },
+    ];
+  },
+};
+```
+
+```js
+useEffect(() => {
+  const fetchs = async () => {
+    const { results } = await (await fetch("/api/movies")).json(); // 받아오는 api URL
+    setMovie(results);
+  };
+  fetchs();
+}, []);
+```
+
+- api/movies주소를 입력하면 api response정보를 받아옴
+- api의 URL에 포함된 api key가 나오지 않게 설정하려면 rewrite를 사용하면 됨

@@ -277,3 +277,12 @@ export async function getServerSideProps() {
   };
 }
 ```
+
+## Dynamic Router
+
+- / 경로는 pages의 index.js
+- /about 경로는 pages의 about.js
+- /movies 경로만 사용 할 경우 pages에 movies.js
+- 만일 /movies와 /movies/all 경로를 사용할 경우(중첩)
+  - pages에 movies폴더를 만들고 index.js(/movies), all.js(/movies/all)을 생성하면 됨(pages/movies/index.js || all.js)
+- /movies/121212를 생성하려면 movies폴더에 [id].js를 만들면 된다.

@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 export default function App({ Component, pageProps }) {
-  console.log(pageProps);
   return (
     <>
       <Layout>
@@ -10,7 +9,7 @@ export default function App({ Component, pageProps }) {
       <style jsx global>
         {`
           a {
-            color: blue;
+            color: black;
           }
         `}
       </style>

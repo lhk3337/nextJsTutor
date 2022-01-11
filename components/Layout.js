@@ -3,7 +3,7 @@ export default function Layout({ children }) {
   return (
     <>
       <NavBar />
-      <div>{children}</div>
+      <div>{children}</div> {/* index component, about component */}
     </>
   );
 }

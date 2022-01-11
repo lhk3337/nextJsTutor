@@ -227,3 +227,53 @@ useEffect(() => {
 
 - api/movies주소를 입력하면 api response정보를 받아옴
 - api의 URL에 포함된 api key가 나오지 않게 설정하려면 rewrite를 사용하면 됨
+
+<br />
+
+## Server Side Rendering
+
+- html의 값이 나타남, 페이지를 로드 하기 전까지 빈 화면으로 보이고, 로드가 끝나면 한번에 모든 페이지가 나타남
+- 서버 사이드 렌더링 미적용, api부분의 html이 없음 <br /><br />
+  <img width="1000" alt="client side" src="https://user-images.githubusercontent.com/44824320/148928463-94eb0181-fefa-4985-905b-46177d122054.png">
+  <br /> <br />
+- 서버 사이드 적용, api부분이 html에 포함 되어 있음
+  <img width="1000" alt="server side" src="https://user-images.githubusercontent.com/44824320/148928455-e50e13f6-3b88-405a-9cbf-b47403ac7b99.png">
+
+### server side rendering 설정
+
+```js
+_app.js
+export default function App({ Component, pageProps }) {
+  console.log(pageProps); // getServerSideProps에서 리런한 results의 값이 pageProps로 전달
+  ...
+}
+```
+
+```js
+index.jsx;
+export default function Home({ results }) {
+  // pageProps의 값이 -> results로 전달
+  return (
+    <div className="container">
+      <Seo title="Home" />
+      {results?.map((movie) => (
+        <div key={movie.id} className="movie">
+          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+          <h4>{movie.original_title}</h4>
+        </div>
+      ))}
+      ...
+    </div>
+  );
+}
+
+export async function getServerSideProps() {
+  // Server side rendering declaration
+  const { results } = await (await fetch(`http://localhost:3000/api/movies`)).json();
+  return {
+    props: {
+      results,
+    },
+  };
+}
+```

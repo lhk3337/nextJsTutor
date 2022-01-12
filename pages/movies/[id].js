@@ -1,6 +1,5 @@
 import Seo from "../../components/Seo";
-const Detail = ({ data }) => {
-  console.log(data);
+export default function Detail({ data }) {
   return (
     <div className="container">
       <Seo title={data.title} />
@@ -39,14 +38,13 @@ const Detail = ({ data }) => {
       </style>
     </div>
   );
-};
+}
 
-Detail.getInitialProps = async (context) => {
+export async function getServerSideProps(context) {
+  console.log(context);
   const { id } = context.query;
   const data = await (await fetch(`http://localhost:3000/api/movies/${id}`)).json();
   return {
-    data,
+    props: { data },
   };
-};
-
-export default Detail;
+}

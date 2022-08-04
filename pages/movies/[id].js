@@ -1,4 +1,5 @@
 import Seo from "../../components/Seo";
+import { server } from "../../config";
 export default function Detail({ data }) {
   return (
     <div className="container">
@@ -43,7 +44,7 @@ export default function Detail({ data }) {
 export async function getServerSideProps(context) {
   console.log(context);
   const { id } = context.query;
-  const data = await (await fetch(`http://localhost:3000/api/movies/${id}`)).json();
+  const data = await (await fetch(`${server}/api/movies/${id}`)).json();
   return {
     props: { data },
   };
